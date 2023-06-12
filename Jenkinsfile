@@ -35,6 +35,12 @@ pipeline {
                 sh "aws eks update-kubeconfig --region eu-central-1 --name eks"
                // sh "aws eks update-kubeconfig --region eu-central-1 --name eks"
                 sh " envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/postgres-configmap.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/storgeclass.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/postgres-pv.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/claim.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/postgres-deploy.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/postgres-service.yaml | ./kubectl apply -f - "
                 //}
             }
         }

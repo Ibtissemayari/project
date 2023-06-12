@@ -1,0 +1,23 @@
+selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: ${REPOSITORY_TAG}
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /data
+      volumes:
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: efs-claim
