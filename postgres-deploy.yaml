@@ -8,7 +8,7 @@ selector:
     spec:
       containers:
         - name: postgres
-          image: ${REPOSITORY_TAG}
+          image: postgres:10.1 # Sets Image
           ports:
             - containerPort: 5432
           envFrom:
