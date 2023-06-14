@@ -41,6 +41,9 @@ pipeline {
                 sh " envsubst < ${WORKSPACE}/claim.yaml | ./kubectl apply -f - "
                 sh " envsubst < ${WORKSPACE}/postgres-deploy.yaml | ./kubectl apply -f - "
                 sh " envsubst < ${WORKSPACE}/postgres-service.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/odoo-config.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/odoo-deploy.yaml | ./kubectl apply -f - "
+                sh " envsubst < ${WORKSPACE}/odoo-service.yaml | ./kubectl apply -f - "
                 //}
             }
         }
